@@ -7,10 +7,9 @@ import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import Fab from '@material-ui/core/Fab';
 import DeleteIcon from '@material-ui/icons/Delete';
-import EditIcon from '@material-ui/icons/Edit';
-import { green } from '@material-ui/core/colors';
 import { removeContact } from '../redux/Actions/ContactActions';
 import { useDispatch } from 'react-redux';
+import EditModal from './EditModal'
 
 
 const useStyles = makeStyles({
@@ -62,9 +61,7 @@ export default function ContactCard({ el, i }) {
                 <Fab color="secondary" aria-label="delete" onClick={delUser}>
                     <DeleteIcon />
                 </Fab>
-                <Fab style={{ color: green[600] }} color="primary" aria-label="edit" >
-                    <EditIcon />
-                </Fab>
+                <EditModal el={el} />
             </CardActions>
         </Card>
     );

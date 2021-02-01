@@ -41,7 +41,7 @@ router.post("/add", async (req, res) => {
 router.put("/update/:id", async (req, res) => {
     const { id } = req.params
     try {
-        const user = await User.findOneAndUpdate({ _id: id }, { new: true }, { $set: req.body })
+        const user = await User.findOneAndUpdate({ _id: id }, { $set: req.body })
         res.json({ msg: 'User Updated', user })
 
     } catch (error) {

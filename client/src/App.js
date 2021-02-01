@@ -7,7 +7,6 @@ function App() {
       <Router>
         <NavBar />
         <ContactList />
-        <h1>hello</h1>
       </Router>
     </div>
   );

@@ -31,5 +31,14 @@ export const removeContact = (idContact) => async (dispatch) => {
     }
 };
 
+export const updateContact = (idContact, updatedContact) => async (dispatch) => {
+    try {
+        const res = await axios.put(`/api/users/update/${idContact}`, updatedContact);
+        dispatch(getContacts())
+    } catch (error) {
+        console.log(error)
+    }
+};
+
 // export const addContact = ()
 

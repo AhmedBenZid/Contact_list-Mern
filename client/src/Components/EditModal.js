@@ -2,52 +2,53 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Modal, Form } from 'react-bootstrap'
 import { Fab } from "@material-ui/core"
-import AddIcon from '@material-ui/icons/Add';
-import { addContact } from "../redux/Actions/ContactActions";
+import EditIcon from '@material-ui/icons/Edit';
+import { green } from '@material-ui/core/colors';
 import {
     Button
 } from '@material-ui/core';
+import { updateContact } from '../redux/Actions/ContactActions'
 
 
-export default function AddContact() {
-    const [firstName, setFirstName] = useState('');
-    const [lastName, setLastName] = useState('');
-    const [email, setEmail] = useState('');
+export default function EditModal({ el }) {
+
+    const [firstName, setFirstName] = useState(el.firstName);
+    const [lastName, setLastName] = useState(el.lastName);
+    const [email, setEmail] = useState(el.email);
     const dispatch = useDispatch()
 
     const [show, setShow] = useState(false);
 
     const handleClose = () => {
         setShow(false)
-        setFirstName('');
-        setLastName('');
-        setEmail('');
     };
     const handleShow = () => setShow(true);
+    const toggle = () => {
+        setFirstName(el.firstName);
+        setLastName(el.lastName);
+        setEmail(el.email);
+        setShow(!show);
+    }
 
-    const handleSubmit = () => {
-        dispatch(addContact({
+    const handleSave = () => {
+        dispatch(updateContact(el._id, {
             firstName,
             lastName,
             email
         }));
-        setFirstName('');
-        setLastName('');
-        setEmail('');
-        setShow(false)
+        toggle()
     }
-
 
     return (
         <>
             <Button variant="primary" onClick={handleShow}>
-                <Fab color="primary" aria-label="add">
-                    <AddIcon />
+                <Fab style={{ color: green[600] }} color="primary" aria-label="edit" >
+                    <EditIcon />
                 </Fab>
             </Button>
             <Modal show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Adding new user</Modal.Title>
+                    <Modal.Title>Edit User</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <Form>
@@ -70,14 +71,14 @@ export default function AddContact() {
                         variant="contained"
                         color="primary"
                         type="submit"
-                        onClick={handleSubmit}
+                        onClick={handleSave}
                     >
-                        Add
+                        Save
                                 </Button>
                     <Button
                         variant="contained"
                         color="secondary"
-                        onClick={handleClose}
+                        onClick={toggle}
                     >
                         Cancel
                                 </Button>
