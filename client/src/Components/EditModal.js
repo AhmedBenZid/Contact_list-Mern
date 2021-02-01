@@ -19,10 +19,8 @@ export default function EditModal({ el }) {
 
     const [show, setShow] = useState(false);
 
-    const handleClose = () => {
-        setShow(false)
-    };
-    const handleShow = () => setShow(true);
+
+
     const toggle = () => {
         setFirstName(el.firstName);
         setLastName(el.lastName);
@@ -41,12 +39,12 @@ export default function EditModal({ el }) {
 
     return (
         <>
-            <Button variant="primary" onClick={handleShow}>
+            <Button variant="primary" onClick={toggle}>
                 <Fab style={{ color: green[600] }} color="primary" aria-label="edit" >
                     <EditIcon />
                 </Fab>
             </Button>
-            <Modal show={show} onHide={handleClose}>
+            <Modal show={show} onHide={toggle}>
                 <Modal.Header closeButton>
                     <Modal.Title>Edit User</Modal.Title>
                 </Modal.Header>
